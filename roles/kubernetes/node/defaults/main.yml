@@ -34,13 +34,13 @@ kubelet_secure_addresses: >-
 kube_reserved: false
 kube_reserved_cgroups_for_service_slice: kube.slice
 kube_reserved_cgroups: "/{{ kube_reserved_cgroups_for_service_slice }}"
-kube_memory_reserved: 256Mi
-kube_cpu_reserved: 100m
+kube_memory_reserved: "{{ fptcloud_kube_memory_reserved }}"
+kube_cpu_reserved: "{{ fptcloud_kube_cpu_reserved }}"
 # kube_ephemeral_storage_reserved: 2Gi
 # kube_pid_reserved: "1000"
 # Reservation for master hosts
-kube_master_memory_reserved: 512Mi
-kube_master_cpu_reserved: 200m
+kube_master_memory_reserved: "{{ fptcloud_kube_master_memory_reserved|default('') }}"
+kube_master_cpu_reserved: "{{ fptcloud_kube_master_cpu_reserved|default('') }}"
 # kube_master_ephemeral_storage_reserved: 2Gi
 # kube_master_pid_reserved: "1000"
 
@@ -60,8 +60,18 @@ system_master_cpu_reserved: 250m
 
 ## Eviction Thresholds to avoid system OOMs
 # https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#eviction-thresholds
-eviction_hard: {}
-eviction_hard_control_plane: {}
+eviction_hard:
+  memory.available: "500Mi"
+  nodefs.available: "10%"
+  imagefs.available: "15%"
+  nodefs.inodesFree: "5%"
+# eviction_hard_control_plane: "{{ fptcloud_eviction_hard_control_plane }}"
+eviction_hard_control_plane:
+  memory.available: "500Mi"
+  nodefs.available: "10%"
+  imagefs.available: "15%"
+  nodefs.inodesFree: "5%"
+kubelet_status_update_frequency: 10s
 
 kubelet_status_update_frequency: 10s
 
