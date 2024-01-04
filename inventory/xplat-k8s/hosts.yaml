@@ -1,14 +1,14 @@
 all:
   hosts:
     node1:
-      ansible_host: 172.16.1.176
-      ip: 172.16.1.176
-      access_ip: 172.16.1.176
+      ansible_host: 172.16.1.175
+      ip: 172.16.1.175
+      access_ip: 172.16.1.175
       ansible_user: a-xplat
     node2:
-      ansible_host: 172.16.1.156
-      ip: 172.16.1.156
-      access_ip: 172.16.1.156
+      ansible_host: 172.16.1.180
+      ip: 172.16.1.180
+      access_ip: 172.16.1.180
       ansible_user: a-xplat
   children:
     kube_control_plane:
