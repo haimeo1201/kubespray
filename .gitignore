@@ -26,6 +26,7 @@ plugins/mitogen
 inventory/*
 !inventory/local
 !inventory/sample
+!inventory/xplat-k8s
 inventory/*/artifacts/
 
 # Byte-compiled / optimized / DLL files
