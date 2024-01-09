@@ -17,16 +17,13 @@ kube_token_dir: "{{ kube_config_dir }}/tokens"
 kube_api_anonymous_auth: true
 
 ## Change this to use another Kubernetes version, e.g. a current beta release
-kube_version: v1.26.11
+kube_version: "{{k8s_version}}"
 
 # Where the binaries will be downloaded.
 # Note: ensure that you've enough disk space (about 1G)
 local_release_dir: "/tmp/releases"
 # Random shifts for retrying failed ops like pushing/downloading
 retry_stagger: 5
-
-# This is the user that owns tha cluster installation.
-kube_owner: kube
 
 # This is the group that the cert creation scripts chgrp the
 # cert files to. Not really changeable...
@@ -39,7 +36,7 @@ kube_log_level: 2
 credentials_dir: "{{ inventory_dir }}/credentials"
 
 ## It is possible to activate / deactivate selected authentication methods (oidc, static token auth)
-# kube_oidc_auth: false
+kube_oidc_auth: false
 # kube_token_auth: false
 
 
@@ -96,26 +93,6 @@ kubelet_max_pods: "{{ k8s_max_pod }}"
 #  - kube_pods_subnet: 10.233.64.0/18
 #  - kube_network_node_prefix: 25
 #  - kubelet_max_pods: 110
-kube_network_node_prefix: 24
-
-# Configure Dual Stack networking (i.e. both IPv4 and IPv6)
-enable_dual_stack_networks: false
-
-# Kubernetes internal network for IPv6 services, unused block of space.
-# This is only used if enable_dual_stack_networks is set to true
-# This provides 4096 IPv6 IPs
-kube_service_addresses_ipv6: fd85:ee78:d8a6:8607::1000/116
-
-# Internal network. When used, it will assign IPv6 addresses from this range to individual pods.
-# This network must not already be in your network infrastructure!
-# This is only used if enable_dual_stack_networks is set to true.
-# This provides room for 256 nodes with 254 pods per node.
-kube_pods_subnet_ipv6: fd85:ee78:d8a6:8607::1:0000/112
-
-# IPv6 subnet size allocated to each for pods.
-# This is only used if enable_dual_stack_networks is set to true
-# This provides room for 254 pods per node.
-kube_network_node_prefix_ipv6: 120
 
 # The port the API Server will be listening on.
 kube_apiserver_ip: "{{ kube_service_addresses|ipaddr('net')|ipaddr(1)|ipaddr('address') }}"
@@ -175,12 +152,8 @@ dns_mode: coredns
 # manual_dns_server: 10.x.x.x
 # Enable nodelocal dns cache
 enable_nodelocaldns: true
-enable_nodelocaldns_secondary: false
 nodelocaldns_ip: 169.254.25.10
 nodelocaldns_health_port: 9254
-nodelocaldns_second_health_port: 9256
-nodelocaldns_bind_metrics_host_ip: false
-nodelocaldns_secondary_skew_seconds: 5
 # nodelocaldns_external_zones:
 # - zones:
 #   - example.com
@@ -216,7 +189,7 @@ enable_coredns_k8s_endpoint_pod_names: false
 # coredns_kubernetes_extra_domains: ''
 
 # Can be docker_dns, host_resolvconf or none
-resolvconf_mode: host_resolvconf
+resolvconf_mode: docker_dns
 # Deploy netchecker app to verify DNS resolve as an HTTP service
 deploy_netchecker: false
 # Ip address of the kubernetes skydns service
@@ -372,7 +345,7 @@ persistent_volumes_enabled: false
 event_ttl_duration: "1h0m0s"
 
 ## Automatically renew K8S control plane certificates on first Monday of each month
-auto_renew_certificates: false
+auto_renew_certificates: true
 # First Monday of each month
 # auto_renew_certificates_systemd_calendar: "Mon *-*-1,2,3,4,5,6,7 03:{{ groups['kube_control_plane'].index(inventory_hostname) }}0:00"
 

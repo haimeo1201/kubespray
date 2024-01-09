@@ -105,14 +105,14 @@
 #    remote_src: true
 #  notify: restart crio
 
-- name: cri-o | copy mounts.conf
-  copy:
-    src: mounts.conf
-    dest: /etc/containers/mounts.conf
-    mode: 0644
-  when:
-    - ansible_os_family == 'RedHat'
-  notify: restart crio
+#- name: cri-o | copy mounts.conf
+  #copy:
+    #src: mounts.conf
+    #dest: /etc/containers/mounts.conf
+    #mode: 0644
+  #when:
+    #- ansible_os_family == 'RedHat'
+  #notify: restart crio
 
 - name: cri-o | create directory for oci hooks
   file:
