@@ -25,7 +25,7 @@ kube_version_min_required: v1.24.0
 kube_proxy_mode: ipvs
 
 ## The timeout for init first control-plane
-kubeadm_init_timeout: 300s
+kubeadm_init_timeout: 100s
 
 ## List of kubeadm init phases that should be skipped during control plane setup
 ## By default 'addon/coredns' is skipped
