@@ -268,7 +268,7 @@ kubelet_shutdown_grace_period_critical_pods: 20s
 deploy_container_engine: "{{ inventory_hostname in groups['k8s_cluster'] or etcd_deployment_type == 'docker' }}"
 
 # Container for runtime
-container_manager: containerd
+container_manager: "{{ container_manager }}"
 
 # Enable Node Resource Interface in containerd or CRI-O. Requires crio_version >= v1.26.0
 # or containerd_version >= 1.7.0.
