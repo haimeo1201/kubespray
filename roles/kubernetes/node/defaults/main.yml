@@ -31,7 +31,7 @@ kubelet_secure_addresses: >-
 
 # Reserve this space for kube resources
 # Set to true to reserve resources for kube daemons
-kube_reserved: false
+kube_reserved: true
 kube_reserved_cgroups_for_service_slice: kube.slice
 kube_reserved_cgroups: "/{{ kube_reserved_cgroups_for_service_slice }}"
 kube_memory_reserved: "{{ fptcloud_kube_memory_reserved }}"
