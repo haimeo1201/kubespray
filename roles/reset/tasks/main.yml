@@ -93,11 +93,11 @@
   tags: [ crio ]
   when: container_manager == "crio"
 
-#- name: reset | forcefully wipe CRI-O's container and image storage
-#  command: "crio wipe -f"
-#  failed_when: false
-#  tags: [ crio ]
-#  when: container_manager == "crio"
+- name: reset | forcefully wipe CRI-O's container and image storage
+  command: "crio wipe -f"
+  failed_when: false
+  tags: [ crio ]
+  when: container_manager == "crio"
 
 - name: reset | stop all cri pods
   shell: "set -o pipefail && {{ bin_dir }}/crictl pods -q | xargs -r {{ bin_dir }}/crictl -t 60s stopp"
