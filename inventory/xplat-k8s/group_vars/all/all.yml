@@ -109,35 +109,6 @@ download_container: false
 
 ## Check if access_ip responds to ping. Set false if your firewall blocks ICMP.
 # ping_access_ip: true
-# BEGIN ANSIBLE MANAGED BLOCK ccm_refresh_token_encode
-ccm_refresh_token_encode: bUd4MmFhdkRhUEtzb1p0STJzNTZ2TmRKcnJKUVNEd1M=
-# END ANSIBLE MANAGED BLOCK ccm_refresh_token_encode
-# BEGIN ANSIBLE MANAGED BLOCK username_encode
-username_encode: eHBsYXQtc3RnX3lqdG5sbGZ6QGZwdGNsb3VkLmNvbQ==
-# END ANSIBLE MANAGED BLOCK username_encode
-# BEGIN ANSIBLE MANAGED BLOCK password_encode
-password_encode: aCg8VCpfd3cxVmJPUSEzOA==
-# END ANSIBLE MANAGED BLOCK password_encode
-# BEGIN ANSIBLE MANAGED BLOCK cluster_id_encode
-cluster_id_encode: bDI0MHI0cG0=
-# END ANSIBLE MANAGED BLOCK cluster_id_encode
-# BEGIN ANSIBLE MANAGED BLOCK vcd_user_encode
-vcd_user_encode: eHBsYXQtc3RnX3lqdG5sbGZ6QGZwdGNsb3VkLmNvbQ==
-# END ANSIBLE MANAGED BLOCK vcd_user_encode
-# BEGIN ANSIBLE MANAGED BLOCK vcd_pass_encode
-vcd_pass_encode: aCg8VCpfd3cxVmJPUSEzOA==
-# END ANSIBLE MANAGED BLOCK vcd_pass_encode
-# BEGIN ANSIBLE MANAGED BLOCK csi_refresh_token
-csi_refresh_token: U6PkH3BQrxhnc1dvZTg7HNG2Ce0AqLgj
-# END ANSIBLE MANAGED BLOCK csi_refresh_token
-# BEGIN ANSIBLE MANAGED BLOCK csi_refresh_token_encode
-csi_refresh_token_encode: VTZQa0gzQlFyeGhuYzFkdlpUZzdITkcyQ2UwQXFMZ2o=
-# END ANSIBLE MANAGED BLOCK csi_refresh_token_encode
-# BEGIN ANSIBLE MANAGED BLOCK network_cidr
-network_cidr: 10.10.10.0/24
-# END ANSIBLE MANAGED BLOCK network_cidr
-# BEGIN ANSIBLE MANAGED BLOCK vcd_refresh_token_encode
-vcd_refresh_token_encode: VTZQa0gzQlFyeGhuYzFkdlpUZzdITkcyQ2UwQXFMZ2o=
-# END ANSIBLE MANAGED BLOCK vcd_refresh_token_encode
+
 
 
