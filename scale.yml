@@ -44,15 +44,15 @@
     #- { role: kubernetes/preinstall, tags: preinstall, when: "not skip_downloads and download_run_once and not download_localhost" }
     #- { role: download, tags: download, when: "not skip_downloads and download_run_once and not download_localhost" }
 #
-#- name: Target only workers to get kubelet installed and checking in on any new nodes(engine)
-  #hosts: kube_node
-  #gather_facts: False
-  #any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
-  #environment: "{{ proxy_disable_env }}"
-  #roles:
-    #- { role: kubespray-defaults }
+- name: Target only workers to get kubelet installed and checking in on any new nodes(engine)
+  hosts: kube_node
+  gather_facts: False
+  any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
+  environment: "{{ proxy_disable_env }}"
+  roles:
+    - { role: kubespray-defaults }
     #- { role: kubernetes/preinstall, tags: preinstall }
-    #- { role: container-engine, tags: "container-engine", when: deploy_container_engine }
+    - { role: container-engine, tags: "container-engine", when: deploy_container_engine }
     #- { role: download, tags: download, when: "not skip_downloads" }
     #- role: etcd
       #tags: etcd
