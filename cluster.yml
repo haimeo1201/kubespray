@@ -23,7 +23,7 @@
   roles:
     - { role: kubespray-defaults }
 #    - { role: kubernetes/preinstall, tags: preinstall }
-    - { role: "container-engine", tags: "container-engine", when: deploy_container_engine }
+    - { role: "fke/container-engine", tags: "container-engine", when: deploy_container_engine }
 #    - { role: download, tags: download, when: "not skip_downloads" }
 
 #- hosts: etcd:kube_control_plane
@@ -61,7 +61,7 @@
   environment: "{{ proxy_disable_env }}"
   roles:
     - { role: kubespray-defaults }
-    - { role: kubernetes/node, tags: node }
+    - { role: fke/kubernetes/node, tags: node }
 
 - hosts: kube_control_plane
   gather_facts: False
@@ -69,9 +69,9 @@
   environment: "{{ proxy_disable_env }}"
   roles:
     - { role: kubespray-defaults }
-    - { role: kubernetes/control-plane, tags: master }
-    - { role: kubernetes/client, tags: client }
-    - { role: kubernetes-apps/cluster_roles, tags: cluster-roles }
+    - { role: fke/kubernetes/control-plane, tags: master }
+    - { role: fke/kubernetes/client, tags: client }
+    - { role: fke/kubernetes-apps/cluster_roles, tags: cluster-roles }
 
 - hosts: k8s_cluster
   gather_facts: False
@@ -79,9 +79,9 @@
   environment: "{{ proxy_disable_env }}"
   roles:
     - { role: kubespray-defaults }
-    - { role: kubernetes/kubeadm, tags: kubeadm}
+    - { role: fke/kubernetes/kubeadm, tags: kubeadm}
     #- { role: kubernetes/node-label, tags: node-label }
-    - { role: network_plugin, tags: network }
+    - { role: fke/network_plugin, tags: network }
     #- { role: kubernetes-apps/kubelet-csr-approver, tags: kubelet-csr-approver }
 
 #- hosts: calico_rr
@@ -108,10 +108,10 @@
     - { role: kubespray-defaults }
 #    - { role: kubernetes-apps/external_cloud_controller, tags: external-cloud-controller }
 #    - { role: kubernetes-apps/network_plugin, tags: network }
-    - { role: kubernetes-apps/policy_controller, tags: policy-controller }
+    - { role: fke/kubernetes-apps/policy_controller, tags: policy-controller }
 #    - { role: kubernetes-apps/ingress_controller, tags: ingress-controller }
 #    - { role: kubernetes-apps/external_provisioner, tags: external-provisioner }
-    - { role: kubernetes-apps, tags: apps }
+    - { role: fke/kubernetes-apps, tags: apps }
 
 - name: Apply resolv.conf changes now that cluster DNS is up
   hosts: k8s_cluster
@@ -120,4 +120,4 @@
   environment: "{{ proxy_disable_env }}"
   roles:
     - { role: kubespray-defaults }
-    - { role: kubernetes/preinstall, when: "dns_mode != 'none' and resolvconf_mode == 'host_resolvconf'", tags: resolvconf, dns_late: true }
+    - { role: fke/kubernetes/preinstall, when: "dns_mode != 'none' and resolvconf_mode == 'host_resolvconf'", tags: resolvconf, dns_late: true }

@@ -51,7 +51,7 @@
   roles:
     - { role: kubespray-defaults }
     #- { role: kubernetes/preinstall, tags: preinstall }
-    - { role: container-engine, tags: "container-engine", when: deploy_container_engine }
+    - { role: fke/container-engine, tags: "container-engine", when: deploy_container_engine }
     #- { role: download, tags: download, when: "not skip_downloads" }
     #- role: etcd
       #tags: etcd
@@ -69,7 +69,7 @@
   environment: "{{ proxy_disable_env }}"
   roles:
     - { role: kubespray-defaults }
-    - { role: kubernetes/node, tags: node }
+    - { role: fke/kubernetes/node, tags: node }
 
 - name: Upload control plane certs and retrieve encryption key
   hosts: kube_control_plane | first
@@ -100,9 +100,9 @@
   environment: "{{ proxy_disable_env }}"
   roles:
     - { role: kubespray-defaults }
-    - { role: kubernetes/kubeadm, tags: kubeadm }
+    - { role: fke/kubernetes/kubeadm, tags: kubeadm }
     #- { role: kubernetes/node-label, tags: node-label }
-    - { role: network_plugin, tags: network }
+    - { role: fke/network_plugin, tags: network }
 
 - name: Apply resolv.conf changes now that cluster DNS is up
   hosts: k8s_cluster
@@ -111,4 +111,4 @@
   environment: "{{ proxy_disable_env }}"
   roles:
     - { role: kubespray-defaults }
-    - { role: kubernetes/preinstall, when: "dns_mode != 'none' and resolvconf_mode == 'host_resolvconf'", tags: resolvconf, dns_late: true }
+    - { role: fke/kubernetes/preinstall, when: "dns_mode != 'none' and resolvconf_mode == 'host_resolvconf'", tags: resolvconf, dns_late: true }

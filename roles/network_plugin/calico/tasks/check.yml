@@ -165,18 +165,18 @@
   run_once: True
   delegate_to: "{{ groups['kube_control_plane'][0] }}"
 
-#- name: "Check if inventory match current cluster configuration"
-  #assert:
-    #that:
-      #- calico_pool_conf.spec.blockSize|int == (calico_pool_blocksize | default(kube_network_node_prefix) | int)
-      #- calico_pool_conf.spec.cidr == (calico_pool_cidr | default(kube_pods_subnet))
-      #- not calico_pool_conf.spec.ipipMode is defined or calico_pool_conf.spec.ipipMode == calico_ipip_mode
-      #- not calico_pool_conf.spec.vxlanMode is defined or calico_pool_conf.spec.vxlanMode == calico_vxlan_mode
-    #msg: "Your inventory doesn't match the current cluster configuration"
-  #when:
-    #- calico_pool_conf is defined
-  #run_once: True
-  #delegate_to: "{{ groups['kube_control_plane'][0] }}"
+- name: "Check if inventory match current cluster configuration"
+  assert:
+    that:
+      - calico_pool_conf.spec.blockSize|int == (calico_pool_blocksize | default(kube_network_node_prefix) | int)
+      - calico_pool_conf.spec.cidr == (calico_pool_cidr | default(kube_pods_subnet))
+      - not calico_pool_conf.spec.ipipMode is defined or calico_pool_conf.spec.ipipMode == calico_ipip_mode
+      - not calico_pool_conf.spec.vxlanMode is defined or calico_pool_conf.spec.vxlanMode == calico_vxlan_mode
+    msg: "Your inventory doesn't match the current cluster configuration"
+  when:
+    - calico_pool_conf is defined
+  run_once: True
+  delegate_to: "{{ groups['kube_control_plane'][0] }}"
 
 - name: "Check kdd calico_datastore if calico_apiserver_enabled"
   assert:

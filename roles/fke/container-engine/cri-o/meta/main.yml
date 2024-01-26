@@ -1,0 +1,5 @@
+---
+dependencies:
+  - role: fke/container-engine/runc
+  - role: fke/container-engine/crictl
+  - role: fke/container-engine/skopeo
