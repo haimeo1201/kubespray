@@ -1,10 +1,10 @@
 ---
 dependencies:
-  - role: kubernetes-apps/ansible
+  - role: fke/kubernetes-apps/ansible
     when:
       - inventory_hostname == groups['kube_control_plane'][0]
 
-  - role: kubernetes-apps/helm
+  - role: fke/kubernetes-apps/helm
     when:
       - helm_enabled
     tags:
@@ -23,28 +23,28 @@ dependencies:
     tags:
       - registry
 
-  - role: kubernetes-apps/metrics_server
+  - role: fke/kubernetes-apps/metrics_server
     when:
       - metrics_server_enabled
       - inventory_hostname == groups['kube_control_plane'][0]
     tags:
       - metrics_server
 
-  - role: kubernetes-apps/csi_driver/csi_crd
+  - role: fke/kubernetes-apps/csi_driver/csi_crd
     when:
       - cinder_csi_enabled or csi_snapshot_controller_enabled
       - inventory_hostname == groups['kube_control_plane'][0]
     tags:
       - csi-driver
 
-  - role: kubernetes-apps/csi_driver/cinder
+  - role: fke/kubernetes-apps/csi_driver/cinder
     when:
       - cinder_csi_enabled
     tags:
       - cinder-csi-driver
       - csi-driver
 
-  - role: kubernetes-apps/csi_driver/aws_ebs
+  - role: fke/kubernetes-apps/csi_driver/aws_ebs
     when:
       - aws_ebs_csi_enabled
     tags:
@@ -79,7 +79,7 @@ dependencies:
       - vsphere-csi-driver
       - csi-driver
 
-  - role: kubernetes-apps/persistent_volumes
+  - role: fke/kubernetes-apps/persistent_volumes
     when:
       - persistent_volumes_enabled
       - inventory_hostname == groups['kube_control_plane'][0]
