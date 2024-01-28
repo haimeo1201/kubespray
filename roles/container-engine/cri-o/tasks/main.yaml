@@ -27,8 +27,8 @@
   import_tasks: "setup-amazon.yaml"
   when: ansible_distribution in ["Amazon"]
 
-- name: cri-o | clean up reglacy repos
-  import_tasks: "cleanup.yaml"
+#- name: cri-o | clean up reglacy repos
+#  import_tasks: "cleanup.yaml"
 
 - name: cri-o | build a list of crio runtimes with Katacontainers runtimes
   set_fact:
