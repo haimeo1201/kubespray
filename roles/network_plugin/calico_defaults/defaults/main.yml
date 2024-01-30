@@ -126,8 +126,8 @@ kube_etcd_key_file: node-{{ inventory_hostname }}-key.pem
 # The default value for calico_datastore is set in role kubespray-default
 
 # Use typha (only with kdd)
-typha_enabled: false
-typha_prometheusmetricsenabled: false
+typha_enabled: true
+typha_prometheusmetricsenabled: true
 typha_prometheusmetricsport: 9093
 
 # Scaling typha: 1 replica per 100 nodes is adequate
@@ -138,7 +138,7 @@ typha_replicas: 1
 typha_max_connections_lower_limit: 300
 
 # Generate certifcates for typha<->calico-node communication
-typha_secure: false
+typha_secure: true
 
 calico_feature_control: {}
 

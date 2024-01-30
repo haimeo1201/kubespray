@@ -54,7 +54,7 @@
     - { role: kubernetes/node, tags: node }
     - { role: kubernetes/control-plane, tags: master, upgrade_cluster_setup: true }
     - { role: kubernetes/client, tags: client }
-    - { role: kubernetes/node-label, tags: node-label }
+    #- { role: kubernetes/node-label, tags: node-label }
     - { role: kubernetes-apps/cluster_roles, tags: cluster-roles }
     - { role: kubernetes-apps, tags: csi-driver }
     - { role: upgrade/post-upgrade, tags: post-upgrade }
@@ -67,7 +67,7 @@
   environment: "{{ proxy_disable_env }}"
   roles:
     - { role: kubespray-defaults }
-    - { role: kubernetes-apps/external_cloud_controller, tags: external-cloud-controller }
+    #- { role: kubernetes-apps/external_cloud_controller, tags: external-cloud-controller }
     - { role: network_plugin, tags: network }
     - { role: kubernetes-apps/network_plugin, tags: network }
     - { role: kubernetes-apps/policy_controller, tags: policy-controller }
@@ -86,26 +86,26 @@
     - { role: container-engine, tags: "container-engine", when: deploy_container_engine }
     - { role: kubernetes/node, tags: node }
     - { role: kubernetes/kubeadm, tags: kubeadm }
-    - { role: kubernetes/node-label, tags: node-label }
+    #- { role: kubernetes/node-label, tags: node-label }
     - { role: upgrade/post-upgrade, tags: post-upgrade }
 
-- name: Patch Kubernetes for Windows
-  hosts: kube_control_plane[0]
-  gather_facts: False
-  any_errors_fatal: true
-  environment: "{{ proxy_disable_env }}"
-  roles:
-    - { role: kubespray-defaults }
-    - { role: win_nodes/kubernetes_patch, tags: ["master", "win_nodes"] }
+#- name: Patch Kubernetes for Windows
+  #hosts: kube_control_plane[0]
+  #gather_facts: False
+  #any_errors_fatal: true
+  #environment: "{{ proxy_disable_env }}"
+  #roles:
+    #- { role: kubespray-defaults }
+    #- { role: win_nodes/kubernetes_patch, tags: ["master", "win_nodes"] }
 
-- name: Install Calico Route Reflector
-  hosts: calico_rr
-  gather_facts: False
-  any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
-  environment: "{{ proxy_disable_env }}"
-  roles:
-    - { role: kubespray-defaults }
-    - { role: network_plugin/calico/rr, tags: network }
+#- name: Install Calico Route Reflector
+  #hosts: calico_rr
+  #gather_facts: False
+  #any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
+  #environment: "{{ proxy_disable_env }}"
+  #roles:
+    #- { role: kubespray-defaults }
+    #- { role: network_plugin/calico/rr, tags: network }
 
 - name: Install Kubernetes apps
   hosts: kube_control_plane
@@ -114,8 +114,8 @@
   environment: "{{ proxy_disable_env }}"
   roles:
     - { role: kubespray-defaults }
-    - { role: kubernetes-apps/ingress_controller, tags: ingress-controller }
-    - { role: kubernetes-apps/external_provisioner, tags: external-provisioner }
+    #- { role: kubernetes-apps/ingress_controller, tags: ingress-controller }
+    #- { role: kubernetes-apps/external_provisioner, tags: external-provisioner }
     - { role: kubernetes-apps, tags: apps }
 
 - name: Apply resolv.conf changes now that cluster DNS is up
