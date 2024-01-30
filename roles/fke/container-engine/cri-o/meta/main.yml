@@ -1,5 +1,5 @@
 ---
 dependencies:
-  - role: container-engine/runc
-  - role: container-engine/crictl
-  - role: container-engine/skopeo
+  - role: fke/container-engine/runc
+  - role: fke/container-engine/crictl
+  - role: fke/container-engine/skopeo
