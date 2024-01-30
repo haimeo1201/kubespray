@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - role: kubernetes-apps/external_cloud_controller/openstack
+  - role: fke/kubernetes-apps/external_cloud_controller/openstack
     when:
       - cloud_provider is defined
       - cloud_provider == "external"
@@ -10,7 +10,7 @@ dependencies:
     tags:
       - external-cloud-controller
       - external-openstack
-  - role: kubernetes-apps/external_cloud_controller/vsphere
+  - role: fke/kubernetes-apps/external_cloud_controller/vsphere
     when:
       - cloud_provider is defined
       - cloud_provider == "external"
@@ -20,7 +20,7 @@ dependencies:
     tags:
       - external-cloud-controller
       - external-vsphere
-  - role: kubernetes-apps/external_cloud_controller/hcloud
+  - role: fke/kubernetes-apps/external_cloud_controller/hcloud
     when:
       - cloud_provider is defined
       - cloud_provider == "external"
@@ -30,7 +30,7 @@ dependencies:
     tags:
       - external-cloud-controller
       - external-hcloud
-  - role: kubernetes-apps/external_cloud_controller/huaweicloud
+  - role: fke/kubernetes-apps/external_cloud_controller/huaweicloud
     when:
       - cloud_provider is defined
       - cloud_provider == "external"
