@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - role: fke/policy_controller/calico
+  - role: fke/kubernetes-apps/policy_controller/calico
     when:
       - kube_network_plugin in ['calico']
       - enable_network_policy
