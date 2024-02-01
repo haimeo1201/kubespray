@@ -47,7 +47,7 @@
   roles:
     - { role: kubespray-defaults }
     - { role: fke/kubernetes/kubeadm, tags: kubeadm}
-    - { role: fke/kubernetes/node-label, tags: node-label }
+    #- { role: fke/kubernetes/node-label, tags: node-label }
     - { role: fke/network_plugin, tags: network }
     - { role: fke/kubernetes-apps/kubelet-csr-approver, tags: kubelet-csr-approver }
 
